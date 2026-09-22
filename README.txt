@@ -1,1 +1,1 @@
-M20 House Tracker v4 - Backup and Restore. Export Backup downloads a JSON file containing tracker state. Restore Backup imports a user-selected M20 backup and, after confirmation, replaces current device tracker records. Upload extracted files to the existing GitHub repository root and commit changes.
+M20 House Tracker v5 modern interface. Keeps the same localStorage key used by prior versions so existing progress remains available in the same browser/site. Backup/Restore moved to More. Upload all extracted files to the existing GitHub repository root and commit.
