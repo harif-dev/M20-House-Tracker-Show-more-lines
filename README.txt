@@ -1,1 +1,1 @@
-M20 House Tracker v5 modern interface. Keeps the same localStorage key used by prior versions so existing progress remains available in the same browser/site. Backup/Restore moved to More. Upload all extracted files to the existing GitHub repository root and commit.
+M20 House Tracker v6. Adds prerequisite locks, mandatory-inspection completion control, start/target/completion dates, issues register, dashboard inspection/issue counts, backup including issues, and faster service-worker updates. Existing stage progress uses the same m20-tracker-v2 localStorage key.
