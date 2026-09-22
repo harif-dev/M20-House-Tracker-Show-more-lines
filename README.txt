@@ -1,1 +1,1 @@
-M20 House Tracker v2 - installable PWA package. Upload the extracted files to the ROOT of the existing GitHub repository, replacing manifest.json and sw.js when asked. Do not upload the ZIP itself.
+M20 House Tracker v4 - Backup and Restore. Export Backup downloads a JSON file containing tracker state. Restore Backup imports a user-selected M20 backup and, after confirmation, replaces current device tracker records. Upload extracted files to the existing GitHub repository root and commit changes.
