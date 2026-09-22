@@ -17,12 +17,36 @@ initializeAppCheck(app, {
   isTokenAutoRefreshEnabled: true
 });
 const ai = getAI(app, { backend: new GoogleAIBackend() });
-const model = getGenerativeModel(ai, { model: 'gemini-3.8-flash' });
+const primaryModel = getGenerativeModel(ai, { model: 'gemini-3.8-flash' });
+const fallbackModel = getGenerativeModel(ai, { model: 'gemini-3.5-flash-lite' });
+const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+const isTemporary = err => /503|overloaded|GEMINI_DEVELOPER_OVERLOADED|unavailable/i.test(String(err?.message || err));
+
+async function callWithRetry(model, prompt, attempts = 3) {
+  let last;
+  for (let i = 0; i < attempts; i++) {
+    try {
+      const result = await model.generateContent(prompt);
+      return result.response.text();
+    } catch (err) {
+      last = err;
+      if (!isTemporary(err) || i === attempts - 1) throw err;
+      window.dispatchEvent(new CustomEvent('m20-ai-retry', { detail: { attempt: i + 2, attempts } }));
+      await sleep(900 * (2 ** i));
+    }
+  }
+  throw last;
+}
 
 window.M20AI = {
   async generate(prompt) {
-    const result = await model.generateContent(prompt);
-    return result.response.text();
+    try {
+      return await callWithRetry(primaryModel, prompt, 3);
+    } catch (err) {
+      if (!isTemporary(err)) throw err;
+      window.dispatchEvent(new Event('m20-ai-fallback'));
+      return await callWithRetry(fallbackModel, prompt, 2);
+    }
   }
 };
 window.dispatchEvent(new Event('m20-ai-ready'));
