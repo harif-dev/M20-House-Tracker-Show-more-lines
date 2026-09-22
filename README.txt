@@ -1,5 +1,2 @@
-M20 V8 Copilot Ready
-1. Existing V7 data keys and photo IndexedDB are unchanged.
-2. Open AI tab and paste the HTTPS Web Chat embed URL from your Copilot Studio Web channel.
-3. Analysis buttons prepare current tracker context. Copy that context into the embedded Copilot chat.
-4. AI is advisory only; checklist/prerequisite logic remains authoritative in the tracker.
+M20 V8 Personal AI Mode
+No Copilot Studio connection required. Use the AI tab to generate live tracker context, copy it, and paste it into your preferred AI chat. Existing V7 tracker data keys, photos, issues, prerequisites and mandatory-inspection logic are preserved.
